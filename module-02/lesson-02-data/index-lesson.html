@@ -78,37 +78,36 @@
     
     <div id='map'></div>
     <section>
-        <h2>About This Map</h2>
-        <p> Map Authored by Jeremy Fisher</p>
+        <h2>about this map</h2>
    
-        <p>Even in the 5th most populated city in the country, Philadelphia manages to contain the largest landscaped urban park in the world, Fairmont Park. Fairmont Park runs along both banks of the Schuylkill River, which is one of two rivers which give the city it's shape. The other, the Delaware River runs from north to south along Philadelphia's Eastern border. The proximity of Philadelphia along the Delaware River to the Atlantic Ocean is probably the reason the city came into existence. The location made trade in colonial times relatively easy, and there is still an active port in South Philadelphia today.
+        <p>Additional information about <a href="http://leafletjs.com/"> the data </a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus.
         </p>
   
         
         <ul>
-        <li>See my projects on GitHub: <a href="https://github.com/jwf61/map672">New Maps Plus</a></li>
-        <li>Follow me on Instagram: <a href="https://www.instagram.com/fisher.jeremy.22/?hl=en">@fisher.jeremy22</a></li>
-        <li>Follow me on <a href="https://www.linkedin.com/in/jeremy-fisher-383b8188">LinkedIn</a>.</li>
+        <li>See my projects on GitHub: <a href="https://github.com/newmapsplus">New Maps Plus</a></li>
+        <li>Follow me on twitter: <a href="https://twitter.com/NewMapsPlus">@NewMapsPlus</a></li>
+        <li>Visit my <a href='#'>mapping portfolio</a>.</li>
         </ul>
             
     </section>
     
     <script>
         
-        document.querySelector('h1').innerHTML = 'My New Stomping Grounds: Philadelphia, PA';
+        document.querySelector('h1').innerHTML = 'web mapping is sweet!';
         var map = document.getElementById('map');
         map.style.background = '#4d4a9f'; 
         map.addEventListener('click',function(){
             this.style.width = '400px'
         })
         var newListItem = document.createElement('li');
-        newListItem.innerHTML = "If I had a blog, it would be called: Birds, Bikes and Maps" ;
+        newListItem.innerHTML = "list item 4";
         document.querySelector('ul').appendChild(newListItem);
         console.log("hello map");
         
         var options = {
-            center: [39.9699, -75.137687],
-            zoom: 13
+            center: [38.0406, -84.5037],
+            zoom: 12
         }
 
         var map = L.map('map', options);
@@ -119,7 +118,7 @@
         maxZoom: 19
         }).addTo(map);
 
-        var message = 'Fisher in Fishtown!';
+        var message = 'Lexington is awesome!';
 
         L.marker(map.getCenter())
             .bindTooltip(message)
