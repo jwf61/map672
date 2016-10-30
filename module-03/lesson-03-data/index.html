@@ -16,8 +16,92 @@
 
 
 <script>
-/* JavaScript code goes here! */
+    /* JavaScript code goes here! */
 
+    
+    console.log("hello map");
+    console.log(5); //numeric, no quotes
+    console.log('5'); //string, quotes
+    console.log(5.5); //fractional numbers
+    console.log(5e10); //exponent
+    console.log(true); //boolean
+    console.log(false); //boolean
+    console.log("true"); //string
+    console.log("false"); //string
+    console.log(5 + 8); //add the numbers to 13
+    console.log(5 < 8); //will be true
+    console.log(5 > 8 ); //will be false
+    console.log(5 == 8); //will be false, 5 not equal to 8
+    console.log(5 != 8); //not equal, will be true
+    console.log("My name is " + "Vance Alligator"); //output My name is Vance Alligator
+    console.log(5 + "8"); //output 58, type conversion - numeric to string
+    console.log(5 + "hello map"); //type conversion - output 5hellomap
+    console.log(5 < "8"); //will be true
+    console.log(5 > "8" ); //will be false
+    console.log(5 == "5"); //true, string to number
+    console.log(5 === "5"); //false,=== best when testing equality of data of two different types
+        //and (&&) or(||) not(!)
+    console.log(1 < 2 && 2 < 3); // both are true, true
+    console.log(1 < 2 && 2 > 3); // one is true, false
+    console.log(1 < 2 || 2 > 3); // one is true, true
+    var city; //creating variable city
+    var myCity; //camelCase
+    var myFavoriteCity;
+    var myFavoriteCityInTheWorld;
+        // = assigns a value to variable
+    var city;
+    city = "Lexington" //assigning lexington as a value for city
+    console.log(city); // pringing city variable(lexington) to console
+    var city = 'Frankfort'; //setting city to frankfort
+    var state = 'Kentucky'; //creating state variable and value
+    console.log(city,', ',state); //whatever symbol used in the example was not working for me, so i just used regular quotes instead
+    var total1 = 15 + 20; //able to set value of variable to an output of equation
+    console.log(total1);
+    var value1 = 30; //creating new variables and values
+    var value2 = 60;
+    var total2 = value1 + value2; 
+    console.log(total2)
+    var average = total1/total2; //calling two variables to be used in equation
+    console.log(average);
+    var year = 2015;
+    console.log(year); //year as numeric value
+    var year = year + 1; //changing value of variable using the same variable
+    console.log(year);
+    var cityPop = 308428; 
+    console.log("The population of Lexington is ", cityPop) //printing string followed by value of city pop
+    var cities = []; //empty Array
+    console.log(cities);
+    var cities = ['Frankfort', 'Louisville', 'Lexington']; //populates values of cities
+    var populations = [25527, 756832, 308428];
+    console.log(populations);
+    var populations = ["Frankfort", 756832, false]; //values in array can be more than 1 type
+    console.log(populations);
+    var twoDArray = [
+        ["Frankfort", "Louisville", "Lexington"],
+        [25527, 756832, 308428],
+        ["Frankfort", 756832, false]
+    ];
+    console.log(twoDArray);
+    var cities = ['Frankfort', 'Louisville', 'Lexington'];
+    console.log(cities[0]); //will print frankfort
+    console.log(cities[1]); // louisville
+    console.log(cities[2]); // lexington
+    console.log(cities[3]); // undefined
+    console.log(twoDArray[0][2]); // lexington
+    console.log(twoDArray[2][1]); // 756832
+    var years = [2010, 2011, 2022, 2013, 2014]; // new array of years
+    console.log(years);
+    years[2] = 2012; //changing the 3rd value to 2012
+    console.log(years);
+    var counties = [];
+    console.log(counties);  // empty array
+    counties[0] = "Adair";
+    console.log(counties); // adding adair to array
+    counties[1] = "Allen";
+    console.log(counties); //adding allen to array
+    counties[5] = "Anderson";
+    console.log(counties); //values 2-4 are indexed and don't show up 
+    
 </script>
     
 </body>
