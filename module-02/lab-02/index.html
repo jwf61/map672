@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Web Page Template</title>
+    <title>My New Stomping Grounds: Philadelphia, PA</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
@@ -38,6 +38,11 @@
             font-family: Lora, serif;
             letter-spacing: .04em;
         }
+        
+        h3 {  font-family: Lora, serif;
+            letter-spacing: .04em;            
+        }
+        
         p {
             font-size: 1em;
             line-height: 1.5em;
@@ -78,36 +83,40 @@
     
     <div id='map'></div>
     <section>
-        <h2>about this map</h2>
+        <h2>About This Map</h2>
+        <p> Map Authored by Jeremy Fisher</p>
    
-        <p>Additional information about <a href="http://leafletjs.com/"> the data </a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus.
+        <p>Even in the 5th most populated city in the country, Philadelphia manages to contain the largest landscaped urban park in the world, Fairmont Park. Fairmont Park runs along both banks of the Schuylkill River, which is one of two rivers which give the city it's shape. The other, the Delaware River runs from north to south along Philadelphia's Eastern border. The proximity of Philadelphia along the Delaware River to the Atlantic Ocean is probably the reason the city came into existence. The location made trade in colonial times relatively easy, and there is still an active port in South Philadelphia today.
         </p>
   
         
         <ul>
-        <li>See my projects on GitHub: <a href="https://github.com/newmapsplus">New Maps Plus</a></li>
-        <li>Follow me on twitter: <a href="https://twitter.com/NewMapsPlus">@NewMapsPlus</a></li>
-        <li>Visit my <a href='#'>mapping portfolio</a>.</li>
+        <li>See my projects on GitHub: <a href="https://github.com/jwf61/map672">jwf61</a></li>
+        <li>Follow me on Instagram: <a href="https://www.instagram.com/fisher.jeremy.22/?hl=en">@fisher.jeremy22</a></li>
+        <li>Follow me on <a href="https://www.linkedin.com/in/jeremy-fisher-383b8188">LinkedIn</a>.</li>
         </ul>
-            
+        
+        <h3>Response to John Pickles' Reading</h3>
+        <p>The "cartographic gaze" in my mind, is reading a map at face value. Whether or not the map portrays an accurate reprsentation of what is actually on the ground in reality, because it is what is displayed on a map, one accepts the map as truth. This cartographic gaze is an extremely influential mindset which has, and will continue to push people in charge to pull the trigger on many key decisions.  Philadelphia has been influenced by the cartographic gaze for centuries. The display of Philadelphia on maps has created neigherborhoods. When looking at Google Maps for instance, like all good atlases, particular roads that are more highly trafficed are displayed in a promident way compared to local roads. These roads that are represented in a promident way can unintentionally create a divide. One side of the road can be viewed at as a well off area, while the other could have a reputation has a "bad neighborhood". With this promident road displayed in Google Maps, these repuations can stick for quite sometime.
+        </p>
     </section>
     
     <script>
         
-        document.querySelector('h1').innerHTML = 'web mapping is sweet!';
+        document.querySelector('h1').innerHTML = 'My New Stomping Grounds: Philadelphia, PA';
         var map = document.getElementById('map');
         map.style.background = '#4d4a9f'; 
-        map.addEventListener('click',function(){
-            this.style.width = '400px'
-        })
+//        map.addEventListener('click',function(){
+//            this.style.width = '400px'
+//        })
         var newListItem = document.createElement('li');
-        newListItem.innerHTML = "list item 4";
+        newListItem.innerHTML = "If I had a blog, it would be called: Birds, Bikes and Maps" ;
         document.querySelector('ul').appendChild(newListItem);
         console.log("hello map");
         
         var options = {
-            center: [38.0406, -84.5037],
-            zoom: 12
+            center: [39.9699, -75.137687],
+            zoom: 13
         }
 
         var map = L.map('map', options);
@@ -118,7 +127,7 @@
         maxZoom: 19
         }).addTo(map);
 
-        var message = 'Lexington is awesome!';
+        var message = 'Fisher in Fishtown!';
 
         L.marker(map.getCenter())
             .bindTooltip(message)
