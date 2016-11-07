@@ -16,8 +16,145 @@
 
 
 <script>
-/* JavaScript code goes here! */
 
+    var cities = ['Frankfort', 'Louisville', 'Lexington'] //creating citie variable
+    console.log(cities.length); //printing lengh of cities
+    var years = [2011, 2012, 2013, 2014, 2015, 2016]; //creating years variable, numeric values
+    var yearsNum = years.length; //creating variable which is the value of the length of years variable
+    console.log(yearsNum);
+    
+    console.log("before the for loop");
+    for(var i = 0; i < 5; i ++) { //variable = integer counter starting at 0; integer less than 5?;yes? begins counter to next integer ++ = i = i + 1 
+        console.log(i);
+    }
+    
+    for (var number = 0; number < 5; number = number + 1) {
+        console.log(number);        
+    }
+    var cities = ['Frankfort', 'Louisville', 'Lexington'];
+    for (var i = 0; i < cities.length; i++) {
+        console.log(i); //will print 0 1 2 and associated cities
+        console.log(cities[i]);   
+    }
+    var newArray = [];
+    for(var i = 0; i < 10; i++){
+        newArray[i] = i + 1; //assigning values for new array
+    }
+    console.log(newArray); 
+    
+    for (var i = 0; i < 5; i ++){
+        console.log('outer loop: ' + i);
+        for (var j = 0; j <5; j++){
+            console.log('inner loop ' + j); //prints whole run of inner loop within outer
+        }
+    }
+    
+    var cities = ['Frankfort', 'Louisville', 'Lexington'];
+    var i = 0;
+    while (i < cities.length){
+        console.log(i)
+        console.log(cities[i]); //will print same thing as above example
+        i++
+    }
+    
+    var temp = 32;
+    if(temp === 32) {
+        console.log('the temperature is freeeeeeeeeezing'); //will print the log
+    }
+    var temp = 33;
+    if(temp === 32) {
+        console.log('the temperature is freeeeeeeeeezing'); //will not print the log
+    }
+    var temp = 33;
+    if(temp === 32) {
+        console.log('the temperature is freeeeeeeeeezing'); 
+    } else {
+        console.log('the temperature is NOT 32, but still may be below FREEZING');
+    }
+    var temp = 33;
+    if(temp <= 32) {
+        console.log('the temperature is freeeeeeeeeezing'); 
+    } else if(temp > 32){
+        console.log('the temperature is above freeeezing');
+    }else {
+        console.log('the value of temp must not be a number');
+    }
+    
+    for(var i = 0; i < 10; i ++) {
+        if(i === 5) {
+            break; //stops the sequence. Would print 0 - 9 if flipped
+        }
+        console.log(i);
+    }
+    
+    var testCity = 'Louisville';
+    for (var i = 0; i < cities.length; i++) {
+        if(cities[i] == testCity) {
+            console.log(testCity + " is found in the city Array!"); 
+        }
+    }
+    
+    for (var i = 0; i < cities.length; i++) {
+        if(cities[i] == testCity) {
+            console.log(testCity + " is found in the city Array!" + i+ "!"); //shows array location     
+        }
+    }
+    var testCity = 'Bowling Green';
+    for (var i = 0; i < cities.length; i++) {
+        if(cities[i] == testCity) {
+            console.log(testCity + " is found in the city Array!" + i+ "!"); //shows array location
+        }else {
+            console.log(testCity + " was not found within the Array at index "+ i + "!")
+        }
+    }
+    
+    for(var i = 0; i <= years.length; i ++) {
+        if(years[i] == 2012){
+            break;
+        } else {
+            console.log(years[i]); //will only pring 2011
+        }
+    }
+    
+    //Start lab 4 prep
+    
+    var cityPops = [308428, 756832, 25527];
+    for (var i = 0; i < cities.length; i++){
+        
+        console.log(cities[i]);
+        
+        console.log(cityPops[i]); //for cities with array value less than 3 (all of them) print city name, print population of that city
+        
+    }
+    
+    for (var i = 0; i < cities.length; i++){
+        
+        var cityName = cities[i];
+        
+        console.log(cityName); //prints name of city
+        
+        var cityPop = cityPops[i]; 
+        
+        console.log(cityPop); //prints pop of the array's value associate city
+    }
+    
+    for (var i = 0; i < cities.length; i++){
+        
+        var cityName = cities[i];
+                
+        var cityPop = cityPops[i]; 
+        
+        var nameAndPop = cityName + ' population:' + ' ' + cityPop;
+        
+        console.log(nameAndPop);
+    }
+    
+    
+    
+    
+    console.log("after the for loop");
+    
+    
 </script>
     
 </body>
