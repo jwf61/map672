@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 04 Starter Template</title>
+    <title>Destinations of Mexico</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
@@ -62,17 +62,17 @@
 
 <body>
 
-	<h1>map title</h1>
+	<h1>Popular Destinations In Mexico</h1>
 
     <div id='map'></div>
 
 	<section>
 		
-		<h2>about this map</h2>
+		<h2>Mexico City, Oaxaca City, and Cancun</h2>
 		
-		<p>Map authored by me, MY NAME</p>
+		<p>Map authored by me, Jeremy Fisher</p>
 
-		<p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. </p>
+		<p>I have been to both Mexico City and Oaxaca City, but not Cancun. I wonder what the ratio is of U.S. citizens having visited Cancun vs U.S. citizens having visited either Mexico City and/or Oaxaca, and not Cancun? My guess, it's somewhere around 15:1. Additional information about <a href="http://data.un.org/Data.aspx?d=POP&f=tableCode%3A240">the population data</a> can be found here. </p>
 
 	</section>
 	
@@ -82,8 +82,8 @@
 
 		// initial map options
 		var options = {
-            center: [0, 0],
-            zoom: 2
+            center: [19.2, -95.4],
+            zoom: 6
         }
 		
 		// instantiate Leaflet map object
@@ -96,21 +96,54 @@
 		// add tiles to map
         map.addLayer(tiles);
             
+        
+        var cities = ['Mexico City', 'Oaxaca', 'Cancun']; 
+        var cityCoords = [
+            [19.43, -99.13 ],
+            [17.06, -96.72 ], 
+            [21.16, -86.85 ]
+        ];
+        var cityPops = [8851000, 255029, 628306];
+        
+        var cityCapaital = [true, false, false];
+        
+        
+        for (var j = 0; j < cities.length; j++) {
+            
+            var cityName = cities[j];
+            
+            var cityPopulation = cityPops[j];
+            
+            var cityCap = cityCapaital[j];
+            
+            if(cityCap[j] === true){
+                var popup = "<b>" + cityName + "</b><br>" +
+                    "<b>population</b>: " + cityPopulation + "Capital of Mexico";
+            }else {
+                var popup = "<b>" + cityName + "</b><br>" +
+                    "<b>population</b>: " + cityPopulation;                
+            }
+                                           
+            L.marker(cityCoords[j]).addTo(map)
+			     .bindPopup(popup[j]); 
+        
+        }
+        
 		// variable to hold string value of city name
-		var cityName = "Denver";
+		//var cityName = "Denver";
 		
 		// variable to hold number value of city population
-		var cityPopulation = 649495;
+		//var cityPopulation = 649495;
         
 		// build a string with HTML tags and content
-        var popup = "<b>" + cityName + "</b><br>" +
-                    "<b>population</b>: " + cityPopulation;
+       // var popup = "<b>" + cityName + "</b><br>" +
+                    //"<b>population</b>: " + cityPopulation;
 
-        // create a Leaflet marker at the coordinates of Denver, CO
+        //// create a Leaflet marker at the coordinates of Denver, CO
 		// add it to the map
 		// and bind the popup content to the marker.
-        L.marker([39.74, -104.99]).addTo(map)
-			.bindPopup(popup);
+        //L.marker(cityCoords).addTo(map)
+			//.bindPopup(popup);
               
     </script>
     
