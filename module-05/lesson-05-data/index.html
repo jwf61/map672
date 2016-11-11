@@ -11,6 +11,159 @@
 
 
 <script>
+
+    
+    function helloMap() { //creating function
+        
+        console.log("Hello Map");
+        
+    }
+
+    helloMap(); //calling function
+    helloMap(); //calling function
+    helloMap(); //calling function
+
+    helloMap(); //hoisting, calling before declaring function 
+    
+    function helloMap() { //creating function
+        
+        console.log("Hello Map");
+    }
+    
+    var helloMap = function() { //function becomes part of a expression
+        console.log("Hello Map");
+        
+    };
+    
+    helloMap();
+    
+    //hoisting does not work with function expressions. Have to create function expression before calling it in this case
+    
+    function outerFunction(message){ //creating function 1
+        console.log(message); //will print message when called
+        var innerFunction = function(message){ //expression within function 1 creates function 2 which also prints message when called
+            console.log(message);
+        };
+        innerFunction("I'm inside!"); //prints 2nd
+    }   
+    outerFunction("i'm outside!"); //prints 1st
+    
+    function saySomething(message){ //creates saySomething, message is the parameter
+        console.log(message);
+    }
+    
+    saySomething("Hello Map"); //argument 1
+    saySomething("Please enter the address you'd like to search for.");//argument 2
+    
+    var firstMessage = "Hello Map"; 
+    saySomething(firstMessage); 
+    var secondMessage = "Please enter the address you'd like to search for."
+    saySomething(secondMessage);
+    
+    var message = "Hello Map";
+    saySomething(message); 
+    message = "Please enter the address you'd like to search for. "
+    saySomething(message); //These 3 examples result to the same being printed
+    
+    function calcAreaRect(width,height){
+        var area = width * height; //assigning variable to value of area
+        console.log(area);
+    }
+    calcAreaRect(40,30); //1st value is associated with width, 2nd with height.
+    
+    var width = 40;
+    var height = 30;
+    calcAreaRect(width,height);//calls function. same result as above, just using the variables we created
+    
+    var peanutButter = 40;
+    var jelly = 30
+    calcAreaRect(peanutButter,jelly);//also the smae^^
+    
+    function calcAreaRect(width,height){
+        var area = width * height; 
+        return area;
+    }
+    
+    var calculatedArea = calcAreaRect(40,30); //creating variable of the result or RETURN of prevous function
+    console.log(calculatedArea);
+    
+    function saysThings() {
+        console.log('hiiii'); //wil print
+        return; //value is undefined
+        console.log('hii2'); //will not print because there is a return statement beofre it
+    }
+    saysThings();
+    
+    function getMultiValues(){
+        var value1 = 5;
+        var value2 = 'iguana';
+        return [value1,value2];
+    }
+    
+    var values = getMultiValues();
+    console.log(values[0]);
+    console.log(values[1]); //only prints 1 value at a time
+    
+    //function sayHello(){
+        //var greeting = "Hi, I'm a web mapper.";
+       // console.log(greeting);
+    //}
+
+    sayHello();
+    //console.log(greeting); //will throw an error because greeting only exists inside the function LOCAL variable
+    
+    var greeting = "Howdy, I'm a cartographer";
+    console.log(greeting); //will print now because greeting is "global"
+    
+    function sayHello(){
+        console.log(greeting); //will print the "Global" greeting
+    }
+    sayHello();
+    
+    
+    //Example starts here
+    
+    
+    var myNums = [3, 1, 7] //creating array
+    
+    logNumsToConsole(myNums); //calling function that we create below, my nums is argument
+    
+    function logNumsToConsole(nums){ //function, nums is parameter
+        
+        for (var i=0; i < nums.length; i++){
+            
+            var doubleNumValue = doubleNum(nums[i]); //setting variable to double of i
+        
+        console.log(doubleNumValue);//will not run or print until doubleNum is acted on
+        }
+    } 
+    
+    function doubleNum(num){ //creating doubleNum so it can be used able. num is parameter
+        return num * 2; //will not print anything. Loads the function above
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 /* JavaScript code goes here! */
 
 </script>
