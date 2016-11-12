@@ -108,17 +108,27 @@
 		map.addLayer(tiles);
 
 		//    var cities = // write 3 city names as Strings within an array
+        var cities = ['Miami', 'San Francisco', 'New Orleans'];
+        
 		//    var cityCoords = // write a two-dimensional array of the coordinates for each city
+        var cityCoords = [
+            [25.76, -80.19],
+            [37.77, -122.42],
+            [29.95, -90.07]
+        ];
+        //console.log(cityCoords[1,1]); just checking to make sure array was okay
 		//    var cityPops = // write the populations of the 3 cities as Numbers within an array;
+        var cityPops = [417650, 837442, 378715]
 		//    var cityAreas = // write the areas of the 3 cities as Numbers within an array;
-
+        var cityAreas = [55.25, 46.87, 350] //area in square miles
+        
 		var button = document.getElementById("map-cities");
 
 		button.addEventListener("click", function () {
 
 			var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
 
-			console.log(units);
+			mapCities(units) //console.log(units);
 
 			// call a function named mapCities, and send the units variable as an argument
 
@@ -126,12 +136,12 @@
 
 
 		// write a function here named mapCities so that it accepts units as a parameter
-
+        function mapCities(units);
 
 		// write a function named calcPopDensity here so that it accepts a 
 		// single city's population, area, and the value for units 
 		// determined by the user
-		
+		function calcPopDensity(pop, area, units)
 		
 	</script>
 
