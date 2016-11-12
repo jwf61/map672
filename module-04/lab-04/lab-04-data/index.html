@@ -67,15 +67,15 @@
     <div id='map'></div>
 
 	<section>
-		
+
 		<h2>Mexico City, Oaxaca City, and Cancun</h2>
-		
+
 		<p>Map authored by me, Jeremy Fisher</p>
 
 		<p>I have been to both Mexico City and Oaxaca City, but not Cancun. I wonder what the ratio is of U.S. citizens having visited Cancun vs U.S. citizens having visited either Mexico City and/or Oaxaca, and not Cancun? My guess, it's somewhere around 15:1. Additional information about <a href="http://data.un.org/Data.aspx?d=POP&f=tableCode%3A240">the population data</a> can be found here. </p>
 
 	</section>
-	
+
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script>
@@ -85,56 +85,56 @@
             center: [19.2, -95.4],
             zoom: 6
         }
-		
+
 		// instantiate Leaflet map object
         var map = L.map('map', options);
-        
+
 		// request remote basemap tiles
 		var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 });
 		// add tiles to map
         map.addLayer(tiles);
-            
-        
-        var cities = ['Mexico City', 'Oaxaca', 'Cancun']; 
+
+
+        var cities = ['Mexico City', 'Oaxaca', 'Cancun'];
         var cityCoords = [
             [19.43, -99.13 ],
-            [17.06, -96.72 ], 
+            [17.06, -96.72 ],
             [21.16, -86.85 ]
         ];
         var cityPops = [8851000, 255029, 628306];
-        
-        var cityCapaital = [true, false, false];
-        
-        
+
+        var cityCapitals = [true, false, false];
+
+
         for (var j = 0; j < cities.length; j++) {
-            
+
             var cityName = cities[j];
-            
+
             var cityPopulation = cityPops[j];
-            
-            var cityCap = cityCapaital[j];
-            
-            if(cityCap[j] === true){
+
+            var cityCap = cityCapitals[j];
+
+            if(cityCap === true){
                 var popup = "<b>" + cityName + "</b><br>" +
-                    "<b>population</b>: " + cityPopulation + "Capital of Mexico";
+                    "<b>population</b>: " + cityPopulation + "<br />Capital of Mexico";
             }else {
                 var popup = "<b>" + cityName + "</b><br>" +
-                    "<b>population</b>: " + cityPopulation;                
+                    "<b>population</b>: " + cityPopulation;
             }
-                                           
+
             L.marker(cityCoords[j]).addTo(map)
-			     .bindPopup(popup[j]); 
-        
+			         .bindPopup(popup);
+
         }
-        
+
 		// variable to hold string value of city name
 		//var cityName = "Denver";
-		
+
 		// variable to hold number value of city population
 		//var cityPopulation = 649495;
-        
+
 		// build a string with HTML tags and content
        // var popup = "<b>" + cityName + "</b><br>" +
                     //"<b>population</b>: " + cityPopulation;
@@ -144,7 +144,7 @@
 		// and bind the popup content to the marker.
         //L.marker(cityCoords).addTo(map)
 			//.bindPopup(popup);
-              
+
     </script>
-    
+
 </body>
