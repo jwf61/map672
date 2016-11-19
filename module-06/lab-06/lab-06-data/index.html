@@ -69,7 +69,7 @@
 
     <section>
 
-        <p>Map authored by me, MY NAME</p>
+        <p>Map authored by me, Jeremy Fisher</p>
 
         <p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus
             luctus. </p>
@@ -81,7 +81,7 @@
 
     <script>
         var map = L.map('map', {
-            center: [38.96, -85.36],
+            center: [39.49, -75.36],
             zoom: 8,
         });
 
@@ -93,14 +93,68 @@
 
         // Begin writing/modifying code for Lab 06 here
 
-        var cities = [{
-            name: "Louisville",
-            properties: {
-                coordinates: [38.25, -85.7667],
-                population: 756832,
-                state: "KY"
+        var cities = [
+            {
+                name: "Philadelphia, ",
+                properties: {
+                    coordinates: [39.9526, -75.1652],
+                    population: 1553000,
+                    state: "PA"
+                }
+            },
+            {
+                name: "Baltimore, ",
+                properties: {
+                    coordinates: [39.2904, -76.6122],
+                    population: 622104,
+                    state: "MD"
+                }
+            },
+            {
+                name: "Washington, ", 
+                properties: {
+                    coordinates: [38.9072, -77.0369],
+                    population: 658893,
+                    state: "D.C"
+                }
             }
-        }];
+        ];
+        
+        for (var i = 0; i < cities.length; i++){
+            var props = cities[i].properties;
+            
+            buildPopup(cities[i].name, props.population, props.state);
+            
+            var popup = "<b>" + cities[i] + "</b><br>" +
+                "<b>" + props.population ;
+            
+            L.marker(props.coordinates).addTo(map)
+                    .bindPopup(popup);
+            
+            
+            //console.log(cities[i].properties);
+            //console.log(props.population);
+        }
+        
+        function buildPopup(city, pop, stateName){
+           if (state == "PA"){
+               var colorClass = "PA-color"
+           }
+            else if (state == "MD"){
+                var colorClass = "MD-color"
+            }
+            else{
+                var colorClass = "DC-color"
+            }
+            
+            console.log(city, pop, stateName);
+        }
+        
+        
+        
+        
+        
+        
     </script>
 
 </body>
