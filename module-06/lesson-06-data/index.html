@@ -11,8 +11,216 @@
 
 
 <script>
-/* JavaScript code goes here! */
 
+    var myObject = {}; //objects use curly brackets instead of square
+    console.log(myObject);
+    
+    var iguana = {
+       name: "Jack",
+        weight: 4.2,
+        age: 8,
+        eyes: "dreamy",
+        questForWorldDomination: true
+    }
+    console.log(iguana); //from syntax, console knows it is an object. Prints properties and values
+    
+    console.log(iguana.name);
+    console.log(iguana.weight); //dot notation for accessing weight 
+    console.log(iguana["name"]);
+    console.log(iguana["weight"]); //bracket notation
+    
+    var iguana = {
+        questForWorldDomination: true,
+        age: 8,
+        eyes: "dreamy",
+        name: "Jack",
+        weight: 4.2,
+        toolkit: { //nested object
+            conquest: "red",
+            surrenderFlag: "white",
+            food: true,
+            music: "Antrax",
+            coolSunglasses: 8
+                            
+        }
+    }
+    console.log(iguana);
+    console.log(iguana.toolkit.music); //dot notation for accessing nested object property
+    console.log(iguana["toolkit"]["music"]);
+    console.log(iguana["toolkit"].coolSunglasses); //can combine bracket and dot notation. I prefer dot notation since no quotes are needed
+    
+    //Reassigning values to properties
+    
+     
+    iguana.weight = 5.2
+    iguana.age = 9 //increasing both weight and age by 1. Dot noation
+    
+    console.log(iguana.weight);
+    console.log(iguana.age);
+    iguana["weight"] = 6.1;
+    iguana["age"] = 10; //bracket notation
+    
+    console.log(iguana.weight); 
+    console.log(iguana.age);
+    
+    iguana.color = "green";
+    iguana.madGenius = true;
+    
+    console.log(iguana);
+    
+    var myObject = {};
+    
+    //for(var i = 0; i < someValues.length; i++) {
+       // myObject["id"+i] = someValues[i];
+   // }
+   // console.log(myObject);
+    
+    var iguana = {
+        name: "Jack",
+        weight: 4.2, 
+        age: 8,
+        eyes: "dreamy",
+        questForWorldDomination: true
+    }
+    
+    for (var key in iguana){
+        console.log(key); //logs the keys or propeties of the object
+    }
+    
+    for (var key in iguana){
+        console.log(iguana[key]); //logs the values of the properties
+    }
+    
+     for (var key in iguana){
+        console.log(key, iguana[key]); //logs propeties followed by values
+    }
+    
+    //var iguana = {
+       // name: "Jack",
+       // weight: 4.2, 
+       /// age: 8,
+       // eyes: "dreamy",
+      //  questForWorldDomination: true
+      //  greeting: function() {
+//console.log("Hello. I am your new overlord.");
+   // }
+   //     }
+//}
+  //  iguana.greeting();
+   /* 
+    var iguana = {
+        name: "Jack",
+        weight: 4.2, 
+        age: 8,
+        eyes: "dreamy",
+        questForWorldDomination: true
+        greeting: function(message){
+            console.log(message);
+        }
+    }
+    iguana.greeting("Howdy There.");
+    iguana.greeting("I am your new overlord.");
+    */
+    
+    var iguana = {
+        name: "Jack",
+        weight: 4.2, 
+        length: 1.5,
+        age: 8,
+        eyes: "dreamy",
+        questForWorldDomination: true,
+        calculateBMI: function(w,l){
+            return w / (l*l); 
+        }
+    }
+    var result = iguana.calculateBMI(4.2, 1.5);
+    console.log(result); 
+    
+    var result = iguana.calculateBMI(iguana.weight, iguana.length);
+    console.log(result);
+    
+    var iguana = {
+        name: "Jack",
+        weight: 4.2, 
+        length: 1.5,
+        age: 8,
+        eyes: "dreamy",
+        questForWorldDomination: true,
+        calculateBMI: function() {
+            var w = this.weight; // this
+            var l = this.length;
+            return w/(l*l);
+        }
+    }
+    
+    var result = iguana.calculateBMI();
+    console.log(result);
+    
+    var iguana = {
+        name: "Jack",
+        weight: 4.2, 
+        length: 1.5,
+        age: 8,
+        eyes: "dreamy",
+        questForWorldDomination: true,
+        invasionPlans: function(inData) {
+            console.log(inData); //
+        }
+    }
+    
+    var lexData = {
+        lat: 38.23,
+        lon: -89.21,
+        name: "Lexington",
+        pop: 821325
+    }
+    
+    iguana.invasionPlans(lexData);
+     //property of invasion plan value is log of funtion, which is an seperate object 
+    
+    var cityName = "Lexington";
+    console.log(cityName);
+    var cityNameWithState = cityName.concat(", KY");
+    console.log(cityNameWithState); 
+    
+    var cityName = "Lexington";
+    var cityNameCaps = cityName.toUpperCase();
+    console.log(cityNameCaps); 
+    
+    var cityName = "Lexington";
+    console.log(cityName.charAt(4)); //charAt identifies specific character
+    console.log(cityName.indexOf("x"));//identifies where character is in string
+    
+    var pop = 1200000;
+    var area = 683.24;
+    var density  =pop/area;
+    
+    console.log(density);
+    
+    var output = density.toLocaleString();
+    console.log(output); //output = density with formatted string value
+    
+    var cities = ["Lexington", "Bowling Green"];
+    console.log(cities); 
+    cities.push("Frankfort");
+    console.log(cities); // push addeds new element to back of array
+    cities.pop();
+    console.log(cities); // pop removes last elemnet of array
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
 
 </script>
     
