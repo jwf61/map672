@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 06 Starter</title>
+    <title>Mid-Atlantic Cities</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
@@ -33,6 +33,8 @@
         }
 
         h2 {
+            width: 960px;
+            margin: 20px auto;
             font-family: "Lora", serif;
             letter-spacing: .04em;
         }
@@ -46,6 +48,18 @@
             color: #005daa;
             font-weight: bold;
             text-decoration: none;
+        }
+        
+        .PA-green{
+            color: darkgreen            
+        }
+        
+        .MD-red{
+            color: firebrick
+        }
+        
+        .DC-blue{
+            color: darkblue
         }
 
         a:hover {
@@ -62,17 +76,17 @@
 </head>
 
 <body>
-    <h1>map title</h1>
+    <h1>Cities of the Mid-Atlantic</h1>
 
     <div id='map'></div>
 
-
+    <h2>Philadelphia, Baltimore, and Washington</h2>
+    
     <section>
 
         <p>Map authored by me, Jeremy Fisher</p>
 
-        <p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus
-            luctus. </p>
+        <p>Data source:<a href="https://www.google.com/">Google</a> </p>
 
     </section>
 
@@ -95,7 +109,7 @@
 
         var cities = [
             {
-                name: "Philadelphia, ",
+                name: "Philadelphia",
                 properties: {
                     coordinates: [39.9526, -75.1652],
                     population: 1553000,
@@ -103,7 +117,7 @@
                 }
             },
             {
-                name: "Baltimore, ",
+                name: "Baltimore",
                 properties: {
                     coordinates: [39.2904, -76.6122],
                     population: 622104,
@@ -111,7 +125,7 @@
                 }
             },
             {
-                name: "Washington, ", 
+                name: "Washington", 
                 properties: {
                     coordinates: [38.9072, -77.0369],
                     population: 658893,
@@ -122,11 +136,11 @@
         
         for (var i = 0; i < cities.length; i++){
             var props = cities[i].properties;
-            
-            buildPopup(cities[i].name, props.population, props.state);
-            
-            var popup = "<b>" + cities[i] + "</b><br>" +
-                "<b>" + props.population ;
+                
+            var popup = buildPopup(cities[i].name, props.population, props.state);
+                
+                //"<b>" + cities + "</b><br>" +
+                //"<b>" + props.population ;
             
             L.marker(props.coordinates).addTo(map)
                     .bindPopup(popup);
@@ -136,25 +150,22 @@
             //console.log(props.population);
         }
         
-        function buildPopup(city, pop, stateName){
+        function buildPopup(city, pop, state){
            if (state == "PA"){
-               var colorClass = "PA-color"
+               var colorClass = "PA-green"
            }
             else if (state == "MD"){
-                var colorClass = "MD-color"
+                var colorClass = "MD-red"
             }
             else{
-                var colorClass = "DC-color"
+                var colorClass = "DC-blue"
             }
             
-            console.log(city, pop, stateName);
+            return "<div class='"+colorClass+"'><b>"+city+"</b><br>"+
+                    "<b>Population</b>: "+pop.toLocaleString()+"<div>";
+            //console.log(city, pop, stateName);
         }
-        
-        
-        
-        
-        
-        
+    
     </script>
 
 </body>
