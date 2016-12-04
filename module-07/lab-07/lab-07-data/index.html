@@ -86,17 +86,28 @@
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
   	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script>
-        
-    
-        
-  
-        
+
+
+
+
+
     var options = {
         center: [40.74,-110.61],
         zoom: 6
     }
-    
+
     var map = L.map('map', options);
+
+    var tiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
+    	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    	subdomains: 'abcd',
+    	minZoom: 0,
+    	maxZoom: 20,
+    	ext: 'png'
+        });
+
+
+    map.addLayer(tiles);
     
     var redIguana = L.latLng(40.7718,-111.9124);
 
@@ -108,35 +119,43 @@
     }).addTo(map);
 
     var clickLocation = map.on('click', function(e){
-        console.log(e.latlng);
-                
-        var clickDistance = (e.latlng).distanceTo(redIguana);
-        var distanceDragged = (distanceDragged/1000);
-        
-        var popup = distanceDragged + " km from the Red Iguana";
-        
+
+        // calculate distance between click and red Iguana in km
+        var clickDistance = e.latlng.distanceTo(redIguana)/1000;
+
+        // build a popup with distance info
+        var popup = clickDistance.toLocaleString() + " km from the Red Iguana";
+
+        // create a draggable marker, add to map, bind and open popup
         var marker = L.marker(e.latlng, {
             draggable: true,
-            opacity: 10
+            opacity: 1 /// opacity is between 0 and 1
         }).addTo(map).bindPopup(popup).openPopup();
-    
-        var dragMarker = new L.draggable(popup);
-        dragMarker.enable(); 
-      
-        
+
+        // when the user has finished dragging the marker
+        marker.on("dragend", function(e) {
+
+            // recalculate the distance
+            clickDistance = marker.getLatLng().distanceTo(redIguana)/1000;
+
+            // recreate the popup
+            popup = clickDistance.toLocaleString() + " km from the Red Iguana";
+
+            // rebind the popup
+            marker.bindPopup(popup);
+
+            // open the popup
+            marker.openPopup();
+
+        });
+
+
     });
-    
-    
-    
-    var tiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	subdomains: 'abcd',
-	minZoom: 0,
-	maxZoom: 20,
-	ext: 'png'
-    });
-    map.addLayer(tiles);  
-        
+
+
+
+
+
     </script>
 
 </body>
