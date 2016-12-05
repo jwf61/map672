@@ -59,102 +59,44 @@
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <script src= "power-plants.js"></script>
     <script>
-    
-  var places = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "marker-color": "#7e7e7e",
-        "marker-size": "medium",
-        "marker-symbol": "",
-        "name": "Tallnin",
-        "size": 159
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          24.737091064453125,
-          59.43529984080577
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "marker-color": "#7e7e7e",
-        "marker-size": "medium",
-        "marker-symbol": "",
-        "name ": "Haapsulu",
-        "size": 11
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          23.538551330566406,
-          58.9469977251194
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "marker-color": "#7e7e7e",
-        "marker-size": "medium",
-        "marker-symbol": "",
-        "name": "Parnu",
-        "size": 32
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          24.518051147460938,
-          58.381558503186966
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "marker-color": "#7e7e7e",
-        "marker-size": "medium",
-        "marker-symbol": "",
-        "name": "Tartu",
-        "size": 39
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          26.720809936523434,
-          58.373458005518714
-        ]
-      }
-    }
-  ]
-};    
-    var map = L.map('map', {
-   center: [58.73, 25.67], // centered in Estonia
-   zoom: 7
+//console.log(plants);
+         
+var map = L.map('map', {
+    center: [36, -94], 
+    zoom: 4,
     });
 
-    var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-        subdomains: 'abcd',
-        maxZoom: 19
-    });  
-    tiles.addTo(map);
-    
-    console.log(places)
-    
-    //var placesLeaflet = L.geoJson(places).addTo(map);  //adds geojson markers to map
-    
-    var placesLeaflet = L.geoJson(places, { //changes geojson points ot layers
-        pointToLayer : function(feature, latlng) {
-            return L.circle(latlng, feature.properties.size * 100); //accessing values of properties in the geojson
+var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+});  
+tiles.addTo(map);
+
+L.geoJson(plants, {
+    pointToLayer: function(feature, latlng){
+            return L.circleMarker(latlng, {
+                color: 'blue',
+                weight: 2,
+                fillColor: 'green',
+                fillOpacity: .8,
+                radius: 10 //will replace hardcoded 2 with what i assume will be individual values in lab
+            });
+    },
+    filter: function(feature, latlng) {
+        if (feature.properties.capacity_mw > 1001 &&
+            feature.properties.fuel_source.Hydro) {
+            return feature;
+        }
     }
-    }).addTo(map)
+}).addTo(map);
+        
+
+        
+    
+
         
     </script>
 

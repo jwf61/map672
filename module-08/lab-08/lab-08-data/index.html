@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 08 Starter</title>
+    <title>U.S. Power Plants</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
@@ -47,22 +47,22 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Wind Power in the United States</h1>
+        <h2>Locations and Installed Capacity of all the wind powered power plants in the U.S.</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
+        <p>Map authored by Jeremy Fisher</p>
+        <p>The size of each circle represents is preportional to amount of capacity each power plant. Notice the large number of wind powered facilities in the Mid-West.<br>Data Source:<a href="http://www.eia.gov/electricity/data/eia923/">U.S. Energy Information Administration</a> </p>
     </footer>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <script src="power-plants.js"></script>
     <script>
 
       var map = L.map('map', {
-          center: [36,-94],
+          center: [38,-94],
           zoom: 4,
       });
 
@@ -73,19 +73,57 @@
       });
 
       tiles.addTo(map);
-
-      L.geoJson(plants, {
-          pointToLayer: function(feature,latlng) {
+    
+    plants.features.sort(function(a, b) { //sorting features in plants with plants with most capacity to draw first
+        return b.properties.capacity_mw - a.properties.capacity_mw;
+    });    
+        
+    //function which will include the geojson(plants) and geojson options (pointToLayer, onEachFeature, filter)     
+    L.geoJson(plants, {
+        //function creating layer from the simple points. Inputs are geojson features and thier latlng
+         pointToLayer: function(feature,latlng) {
+                    //layer is circle marker, inputs latlng and options. Options are in the form of a method
               return L.circleMarker(latlng, {
-                 color: 'orange',
+                 color: 'silver',
                  weight: 1,
-                 fillColor: 'yellow',
-                 fillOpacity: 1,
-                 radius: 2
+                 fillColor: 'green',
+                 fillOpacity: .6,
+                  //calling getRadius from below for value of radius
+                 radius: getRadius(feature.properties.capacity_mw)
               });
-          }
-      }).addTo(map);
-
+        },
+            //function that will be called to each feature in the geojson
+        onEachFeature : function(feature, layer) {
+            //sets eventListener when mouseover
+            layer.on('mouseover', function() {
+                //method to set a style when above action is taken with style input is a
+                layer.setStyle({
+                    //path option
+                    fillColor: 'yellow'
+                });
+            });
+            layer.on('mouseout', function() {
+                layer.setStyle({
+                    fillColor: 'green'
+                });
+            });
+            //method which includes popup for all geojson features. Needs html string
+            layer.bindPopup("Plant Name: "+ "<b>" + feature.properties['plant_name'] +"</b>" + "<br>" + "Installed Capacity of Plant: " + "<b>"+feature.properties.capacity_mw+"MW"+"</b>");
+        },
+        //function that needs geojson features and latlng as inputs
+        filter : function(feature, latlng) {
+            if (feature.properties.fuel_source.Wind) {
+                return feature;
+                }
+        }
+        //adds all in LgeoJson to var map
+    }).addTo(map);
+        
+        //function which returns radius, which is used as 1 of the opions in circleMarker 
+      function getRadius(area) {
+            var radius = Math.sqrt(area/Math.PI);
+            return radius;
+      }
 
     </script>
 
