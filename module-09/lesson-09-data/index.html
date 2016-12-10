@@ -74,6 +74,112 @@
       });
 
       tiles.addTo(map);
+    var commonStyles = {
+        weight: 1,
+        stroke: 1,
+        fillOpacity: .8
+    }
+    var layerInfo = {
+        hydroLayer: {source:"Hydro", color:'#1f78b4'},
+        windLayer: {source:"Wind", color:'#a6cee3'},
+        solarLayer: {source:"Solar", color:'#ffff99'}
+    };
+    
+    var geoJsonLayers = {};
+    
+    for(var layer in layerInfo) {
+        geoJsonLayers[layer] = L.geoJson(plants, {
+            pointToLayer: function(feature,latlng) {
+                return L.circleMarker(latlng, commonStyles);            
+            },
+            filter: function(feature) {
+                if(feature.properties.fuel_source[layerInfo[layer].source]) {
+                    return feature;
+                }
+            },
+            style: function(feature) {
+                return {
+                    color: layerInfo[layer].color,
+                    fillColor: layerInfo[layer].color,
+                    radius: getRadius(feature.properties.fuel_source[layerInfo[layer].source])
+                }   
+            }
+        }).addTo(map);
+    }
+    
+    var allLayers = L.geoJson(plants);
+        
+    map.on('click', function(e) {
+        
+        var stats = {};
+        
+        allLayers.eachLayer(function(layer) {
+            var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
+            if (distance <= 500){
+                var props = layer.feature.properties;
+                for(var source in props.fuel_source) {
+                    if(stats[source]) {
+                        stats[source] = props.fuel_source[source];
+                    } else {
+                        stats[source] = props.fuel_source[source];
+                    }
+                }
+            }
+        })
+        
+        //radiusCircle.setLatLng(e.latlng);
+        
+        var statsContent = '';
+        for (stat in stats) {
+            statsContent += stat + ': ' + stats[stat].toLocaleString() + 'MW<br>';
+        }
+        
+        //radiusCircle.bindPopup(statsContent).openPopup();
+        
+        for(var layer in layerInfo) {
+            geoJsonLayers[layer].eachLayer(function(layer) {
+                var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
+
+                if (distance > 500) {
+                    layer.setStyle({
+                        stroke: false,
+                        fill: false
+                    });
+                }   else {
+                    layer.setStyle({
+                        stroke: true,
+                        fill: true
+                    });
+                        var content = layer.feature.properties.plant_name + "<br>";
+                        
+                        //content += layer.feature.properties.fuel_source + "<br>"
+                        content += distance.toLocaleString()+ " from the click point"
+                        
+                    layer.bindPopup(content);
+                }
+
+            });
+        }
+    });
+    var sourceLabels = {
+        "Hydro": geoJsonLayers.hydroLayer,
+        "Wind": geoJsonLayers.windLayer,
+        "Solar": geoJsonLayers.solarLayer
+    }    
+    
+    var sourcesLayers = {
+        "<b style='color:#1f78b4'>Hydro</b>": geoJsonLayers.hydroLayer,
+        "<b style='color:#a6cee3'>Wind</b>": geoJsonLayers.windLayer,
+        "<b style='color:#ffff99; text-shadow: 0px 0px 1px #333;'>Solar</b>": geoJsonLayers.solarLayer
+    };
+    
+    L.control.layers(null, sourcesLayers, { collapsed:false }).addTo(map);
+
+    function getRadius(val) {
+        var radius = Math.sqrt(val/Math.PI);
+        return radius * .8;   
+    }
+    
 
     </script>
 
