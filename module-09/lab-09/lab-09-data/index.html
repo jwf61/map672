@@ -47,15 +47,15 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Coal, Petroleum, or Hydro Power?</h1>
+        <h2>Which Is Most Produced Most In An Area?</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
+        <p>Map authored by Jeremy Fisher</p>
+        <p>Click the map to show power plants which produce power from Coal, Petroleum, and/or Hydro. Only power plants within 500km of the click location wil appear.</p>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
@@ -74,6 +74,107 @@
       });
 
       tiles.addTo(map);
+    
+    var commonStyles = {
+        weight: 2,
+        stroke: 1,
+        fillOpacity: .5
+    }
+    var layerInfo = {
+        coalLayer: {source:"Coal", color:'#737771', fillColor:'#78906e'},//drew coal first because it was covering much of hydro and petro
+        hydroLayer: {source:"Hydro", color:'#7cc0ed', fillColor:'#1f78b4'},
+        petroleumLayer: {source:"Petroleum", color:'#a8245b', fillColor:'#ac728a'}
+        
+    };
+    
+//    plants.features.sort(function(a, b) { //sorting features in plants with plants with most capacity to draw first
+//        return b.properties.capacity_mw - a.properties.capacity_mw;
+//    });    
+        
+    var geoJsonLayers = {};
+      
+    for(var layer in layerInfo) {
+        geoJsonLayers[layer] = L.geoJson(plants, {
+            pointToLayer: function(feature,latlng) {
+                return L.circleMarker(latlng, commonStyles);            
+            },
+            filter: function(feature) {
+                if(feature.properties.fuel_source[layerInfo[layer].source]) {
+                    return feature;
+                }
+            },
+            style: function(feature) {
+                return {
+                    color: layerInfo[layer].color,
+                    fillColor: layerInfo[layer].fillColor,
+                    radius: getRadius(feature.properties.fuel_source[layerInfo[layer].source])
+                }   
+            }
+        }).addTo(map);
+    }  
+    map.on('click', function(e) {
+        for(var l in layerInfo) {
+                geoJsonLayers[l].eachLayer(function(layer) {
+                    var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
+
+                    if (distance > 500) {
+                        layer.setStyle({
+                            stroke: false,
+                            fill: false
+                        });
+                    }   else {
+                        layer.setStyle({
+                            stroke: true,
+                            fill: true
+                        });
+                        
+//                            var fuelObject = layer.feature.properties.fuel_source.s;
+//                            if (fuel_source
+//                            console.log(fuelObject);
+//                          
+                            var props = layer.feature.properties;
+                            var content = '<b>'+ props.plant_name +'</b>'+ "<br>";
+                            content += '<b> Producing '+ props.capacity_mw + ' MW of power from '  + layerInfo[l].source +'</b>' + "<br>"; //layer.feature.properties.fuel_source[layerInfo[l].sourceLabels]+'<br>';
+                            //content += '<b>'+ fuelObject +'</b>' + "<br>";
+                            content += '<b>'+ distance.toLocaleString()+ " Kilometers from the click location. </b>"
+
+                        layer.bindPopup(content);
+                    }
+
+
+                });
+            }
+    });
+    
+    function getRadius(val) {
+        var radius = Math.sqrt(val/Math.PI);
+        return radius * .5;   
+    }
+    var sourceLabels = {
+        "Coal": geoJsonLayers.coalLayer,
+        "Petroleum": geoJsonLayers.petroleumLayer,
+        "Hydro": geoJsonLayers.hydroLayer
+    } 
+    
+    var sourceLayers = {
+        "<b style='color:#7cc0ed'>Hydro</b>": geoJsonLayers.hydroLayer,
+        "<b style='color:#a8245b'>Petroleum</b>": geoJsonLayers.petroleumLayer,
+        "<b style='color:#737771'>Coal</b>": geoJsonLayers.coalLayer
+    };
+    
+    L.control.layers(null, sourceLayers, { collapsed:false }).addTo(map);
+        
+        
+        
+        
+        //; text-shadow: 0px 0px 1px #333;
+        
+        
+        
+        
+        
+        
+        
 
     </script>
 
